@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GameManager {
-
     private IdGenerator idGenerator;
     private Map<String, String> internalByExternalId = new HashMap<>();
     private Map<String, Game> gameByInternalId = new HashMap<>();
