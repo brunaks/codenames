@@ -1,11 +1,11 @@
 package bmworks.endpoints;
 
-public class CreateGameRequest {
+public class joinGameRequest {
 
     public String gameExternalId;
     public String playerName;
 
-    public CreateGameRequest(String gameExternalId, String playerName) {
+    public joinGameRequest(String gameExternalId, String playerName) {
 
         this.gameExternalId = gameExternalId;
         this.playerName = playerName;
