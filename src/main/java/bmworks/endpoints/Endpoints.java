@@ -15,7 +15,7 @@ public class Endpoints {
     }
 
     @RequestMapping(value = "/game", method = RequestMethod.POST)
-    public JoinGameResponse joinGame(@RequestBody joinGameRequest joinGameRequest) {
+    public JoinGameResponse joinGame(@RequestBody JoinGameRequest joinGameRequest) {
 
         var game = gameManager.getOrCreateGame(joinGameRequest.gameExternalId);
         game.addPlayer(joinGameRequest.playerName);

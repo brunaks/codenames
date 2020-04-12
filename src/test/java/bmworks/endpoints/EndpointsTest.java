@@ -17,7 +17,7 @@ class EndpointsTest {
 
     @Test
     public void createAGameWithOnePlayer() {
-        var gameResponse = endpoints.joinGame(new joinGameRequest("game1", "Player 1"));
+        var gameResponse = endpoints.joinGame(new JoinGameRequest("game1", "Player 1"));
         assertEquals("game1", gameResponse.externalId);
         assertEquals("id1", gameResponse.internalId);
         assertEquals("id2", gameResponse.playerId);
@@ -25,8 +25,8 @@ class EndpointsTest {
 
     @Test
     public void reuseGameForNewPlayer() {
-        var gameResponse = endpoints.joinGame(new joinGameRequest("game1", "Player 1"));
-        gameResponse = endpoints.joinGame(new joinGameRequest("game1", "Player 2"));
+        var gameResponse = endpoints.joinGame(new JoinGameRequest("game1", "Player 1"));
+        gameResponse = endpoints.joinGame(new JoinGameRequest("game1", "Player 2"));
         assertEquals("game1", gameResponse.externalId);
         assertEquals("id1", gameResponse.internalId);
         assertEquals("id3", gameResponse.playerId);
@@ -34,7 +34,7 @@ class EndpointsTest {
 
     @Test
     public void getGameViewForNewlyCreatedGame() {
-        endpoints.joinGame(new joinGameRequest("game1", "Player 1"));
+        endpoints.joinGame(new JoinGameRequest("game1", "Player 1"));
 
         var gameView = endpoints.getGame("id1");
         assertEquals("game1", gameView.externalId);
@@ -46,8 +46,8 @@ class EndpointsTest {
 
     @Test
     public void getGameViewAfterSecondPlayerJoins() {
-        endpoints.joinGame(new joinGameRequest("game1", "Player 1"));
-        endpoints.joinGame(new joinGameRequest("game1", "Player 2"));
+        endpoints.joinGame(new JoinGameRequest("game1", "Player 1"));
+        endpoints.joinGame(new JoinGameRequest("game1", "Player 2"));
 
         var gameView = endpoints.getGame("id1");
         assertEquals(2, gameView.players.size());
@@ -56,9 +56,9 @@ class EndpointsTest {
 
     @Test
     public void playersShouldBeAddedToAlternatingTeams() {
-        endpoints.joinGame(new joinGameRequest("game2", "Player 1"));
-        endpoints.joinGame(new joinGameRequest("game2", "Player 2"));
-        endpoints.joinGame(new joinGameRequest("game2", "Player 3"));
+        endpoints.joinGame(new JoinGameRequest("game2", "Player 1"));
+        endpoints.joinGame(new JoinGameRequest("game2", "Player 2"));
+        endpoints.joinGame(new JoinGameRequest("game2", "Player 3"));
 
         var gameView = endpoints.getGame("id1");
         assertEquals(3, gameView.players.size());
@@ -67,9 +67,9 @@ class EndpointsTest {
 
     @Test
     public void beforeForthPlayerJoins_theGameCanNotBeStarted() {
-        endpoints.joinGame(new joinGameRequest("game2", "Player 1"));
-        endpoints.joinGame(new joinGameRequest("game2", "Player 2"));
-        endpoints.joinGame(new joinGameRequest("game2", "Player 3"));
+        endpoints.joinGame(new JoinGameRequest("game2", "Player 1"));
+        endpoints.joinGame(new JoinGameRequest("game2", "Player 2"));
+        endpoints.joinGame(new JoinGameRequest("game2", "Player 3"));
 
         var gameView = endpoints.getGame("id1");
         assertFalse(gameView.canBeStarted);
@@ -77,10 +77,10 @@ class EndpointsTest {
 
     @Test
     public void whenForthPlayerJoins_theGameCanBeStarted() {
-        endpoints.joinGame(new joinGameRequest("game2", "Player 1"));
-        endpoints.joinGame(new joinGameRequest("game2", "Player 2"));
-        endpoints.joinGame(new joinGameRequest("game2", "Player 3"));
-        endpoints.joinGame(new joinGameRequest("game2", "Player 4"));
+        endpoints.joinGame(new JoinGameRequest("game2", "Player 1"));
+        endpoints.joinGame(new JoinGameRequest("game2", "Player 2"));
+        endpoints.joinGame(new JoinGameRequest("game2", "Player 3"));
+        endpoints.joinGame(new JoinGameRequest("game2", "Player 4"));
 
         var gameView = endpoints.getGame("id1");
         assertTrue(gameView.canBeStarted);
@@ -88,11 +88,11 @@ class EndpointsTest {
 
     @Test
     public void whenOddNumberOfPlayersGreaterThanFour_theGameCanBeStarted() {
-        endpoints.joinGame(new joinGameRequest("game2", "Player 1"));
-        endpoints.joinGame(new joinGameRequest("game2", "Player 2"));
-        endpoints.joinGame(new joinGameRequest("game2", "Player 3"));
-        endpoints.joinGame(new joinGameRequest("game2", "Player 4"));
-        endpoints.joinGame(new joinGameRequest("game2", "Player 5"));
+        endpoints.joinGame(new JoinGameRequest("game2", "Player 1"));
+        endpoints.joinGame(new JoinGameRequest("game2", "Player 2"));
+        endpoints.joinGame(new JoinGameRequest("game2", "Player 3"));
+        endpoints.joinGame(new JoinGameRequest("game2", "Player 4"));
+        endpoints.joinGame(new JoinGameRequest("game2", "Player 5"));
 
         var gameView = endpoints.getGame("id1");
         assertTrue(gameView.canBeStarted);
