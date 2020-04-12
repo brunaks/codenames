@@ -4,9 +4,6 @@ import bmworks.game.Game;
 import bmworks.game.GameManager;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @RestController
 public class Endpoints {
     private GameManager gameManager;

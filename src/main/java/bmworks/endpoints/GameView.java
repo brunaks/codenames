@@ -17,5 +17,6 @@ public class GameView {
         externalId = game.getExternalId();
         internalId = game.getInternalId();
         players = game.getPlayers().stream().map(PlayerView::new).collect(toList());
+        canBeStarted = game.canBeStarted();
     }
 }

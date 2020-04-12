@@ -26,9 +26,14 @@ public class Game {
     }
 
     public void addPlayer(String playerName) {
-        if (players.isEmpty())
-            this.players.add(new Player(playerName, Team.RED, true));
-        else
-            this.players.add(new Player(playerName, Team.BLUE, false));
+        this.players.add(new Player(playerName, getNextTeam(), players.isEmpty()));
+    }
+
+    private Team getNextTeam() {
+        return players.size() % 2 == 0 ? Team.RED : Team.BLUE;
+    }
+
+    public boolean canBeStarted() {
+        return players.size() >= 4;
     }
 }
