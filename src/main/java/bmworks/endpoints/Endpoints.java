@@ -2,23 +2,29 @@ package bmworks.endpoints;
 
 import bmworks.game.Game;
 import bmworks.game.GameManager;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class Endpoints {
     private GameManager gameManager;
+    private SimpMessagingTemplate messagingTemplate;
     private IdGenerator idGenerator;
 
-    public Endpoints(IdGenerator idGenerator) {
+    public Endpoints(IdGenerator idGenerator,
+                     SimpMessagingTemplate messagingTemplate) {
         this.idGenerator = idGenerator;
         gameManager = new GameManager(idGenerator);
+        this.messagingTemplate = messagingTemplate;
     }
 
     @RequestMapping(value = "/game", method = RequestMethod.POST)
     public JoinGameResponse joinGame(@RequestBody JoinGameRequest joinGameRequest) {
-
         var game = gameManager.getOrCreateGame(joinGameRequest.gameExternalId);
         game.addPlayer(joinGameRequest.playerName);
+
+        messagingTemplate.convertAndSend("/game/fakeId", "new player added");
+
         return new JoinGameResponse(joinGameRequest.gameExternalId, game.getInternalId(), idGenerator.next());
     }
 

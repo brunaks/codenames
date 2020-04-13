@@ -12,7 +12,7 @@ class EndpointsTest {
 
     @BeforeEach
     void setUp() {
-        endpoints = new Endpoints(new FakeIdGenerator());
+        endpoints = new Endpoints(new FakeIdGenerator(), null);
     }
 
     @Test
