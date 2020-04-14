@@ -39,18 +39,18 @@
 <body>
 <div class="container-fluid">
 
-    <form>
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" placeholder="Enter your username">
+    <form class="m-5">
+        <div class="form-group col-6 offset-3 row">
+            <label for="username" class="col-sm-2">Username</label>
+            <input type="text" class="form-control col-sm-9 offset-1" id="username" placeholder="Enter your username">
         </div>
 
-        <div class="form-group">
-            <label for="game">Game ID</label>
-            <input type="text" class="form-control" id="gameId" placeholder="Game ID">
+        <div class="form-group col-6 offset-3 row">
+            <label for="gameId" class="col-sm-2">Game ID</label>
+            <input type="text" class="form-control col-sm-9 offset-1" id="gameId" placeholder="Game ID">
         </div>
 
-        <button type="button" class="btn btn-primary" onclick="joinGame()">Join/Create Game</button>
+        <button type="button" class="btn btn-primary col-2 offset-5" onclick="joinGame()">Join/Create Game</button>
     </form>
 
 </div>
